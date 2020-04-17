@@ -12,6 +12,7 @@ public class Persona {
 
     PreparedStatement ps;
     ResultSet rs;
+     boolean decide ;
     Connection c = getConnection();
     private String nombreUsuario;
     private String nombre;
@@ -36,13 +37,13 @@ public class Persona {
         this.contrasena = contrasena;
     }
 
-    public boolean registro(String nombreUsuario, String contrasena, String nombre, String apellido, int edad, String correo) {
-        boolean decide = false;
+    public boolean registro() {
+       
         try {
             ps = c.prepareStatement("SELECT nombreUsuario FROM usuario WHERE nombreUsuario=?");
             ps.setString(1, nombreUsuario);
             rs = ps.executeQuery();
-            
+
             if (rs.next()) {
                 //ya estaria creado el usuario en la BD 
                 decide = false;
@@ -70,9 +71,8 @@ public class Persona {
         }
         return decide;
     }
-    
 
-    public void login(String nombreUsuario, String contrasena) {
+    public boolean login(String nombreUsuario, String contrasena) {
 
         try {
             ps = c.prepareStatement("SELECT nombreUsuario, contrasena FROM usuario where nombreUsuario=? and contrasena=?");
@@ -81,13 +81,15 @@ public class Persona {
             rs = ps.executeQuery();
             if (rs.next()) {
                 //Dejar al usuario iniciar sesion
+                decide=true;
             } else {
                 //Usuario y contraseña incorrectos en otra vista
+                decide=false;
             }
         } catch (SQLException ex) {
             Logger.getLogger(Persona.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        return decide;
     }
 
     public String getNombreUsuario() {

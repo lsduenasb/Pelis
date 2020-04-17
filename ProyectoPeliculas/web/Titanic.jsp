@@ -1,3 +1,16 @@
+<%-- 
+    Document   : Titanic
+    Created on : 15/04/2020, 02:09:33 PM
+    Author     : Equipo
+--%>
+<%@page import="modelo.Persona"%>
+<%@page import="modelo.Pelicula"%>
+<%
+    Pelicula peli=(Pelicula)request.getSession().getAttribute("Pelicula");
+    Persona pe=(Persona)request.getSession().getAttribute("persona");
+    %>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -54,10 +67,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
            de su prometida. Jack y Rose se enamoran, pero el prometido y la madre de ella ponen todo tipo de trabas
             a su relación. Mientras, el gigantesco y lujoso transatlántico se aproxima hacia un inmenso iceberg. </p>
           <!--Consultas-->
-          <h3>Director:</h3>
-          <h3>Año de estreno:</h3>
-          <h3>Genero:</h3>
-          <button type="button" class="w3-button w3-grey" name="button">Agregar a favoritos</button>
+          <h3>Director: <%= peli.getDirector() %></h3>
+          <h3>Año de estreno: <%= peli.getAñoEstreno() %></h3>
+          <h3>Genero: <%= peli.getGenero() %></h3>
+          
+          <form action="agregarPeliculaFavorita.do" method="GET">
+              <input type="hidden" name="nombrePelicula" value="<%=peli.getNombrePelicula() %> ">
+              <input type="hidden" name="nombreUsuario" value="<%=pe.getNombreUsuario() %>">
+          <button type="submit" class="w3-button w3-grey" name="button">Agregar a favoritos</button>
+          </form>
      </div>
 
    </div>
@@ -79,3 +97,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
     <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
   </footer>
 </html>
+
+
+

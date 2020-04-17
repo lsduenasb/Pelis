@@ -1,9 +1,18 @@
+<%-- 
+    Document   : IngresoExitoso
+    Created on : 15/04/2020, 10:50:14 PM
+    Author     : Equipo
+--%>
+<%@page import="modelo.Persona"%>
+<%
+    Persona pe = (Persona) request.getSession().getAttribute("persona");
+%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!-- saved from url=(0063)https://www.w3schools.com/w3css/tryw3css_templates_travel2.htm# -->
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Home</title>
+        <title>Ingreso jeje</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -14,6 +23,7 @@
             .myLink {display: none}
         </style>
     </head>
+
 
     <body class="w3-light-grey">
 
@@ -43,49 +53,12 @@
             <img class="" src="./IMAGENES/Cartelera.jpg" alt="Fondo" width="1350" height="700">
             <div class="w3-display-middle" style="width:65%">
                 <div class="w3-bar w3-black">
-                    <button class="w3-bar-item w3-button tablink w3-red" onclick="openLink(event, & #39; Login & #39; );"><i class="fa fa-address-card w3-margin-right"></i>Iniciar Sesión</button>
-                    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, & #39; Signin & #39; );"><i class="fa fa-file-text w3-margin-right"></i>Registrarse</button>
+                    <button class="w3-bar-item w3-button "></button>
+
                 </div>
-
-
-                <!-- Tabs -->
-                <div id="Login" class="w3-container w3-white w3-padding-16 myLink" style="display: block;">
-
-                    <div class="w3-row-padding" style="margin:0 -16px;">
-                        <form class="" action="ingresar.do" method="post">
-                            <label>Usuario</label>
-                            <input class="w3-input w3-border" type="text" name="nombreUsuario" placeholder="Ingrese su usuario" required="">
-                            <label>Contraseña</label>
-                            <input class="w3-input w3-border" type="password" name="contrasena"placeholder="Ingrese su contraseña" required="">
-                            <p><button class="w3-button w3-dark-grey" type="submit">Ingresar</button></p>
-                        </form>
-                    </div>
+                <div class="w3-container w3-white w3-padding-16 ">
+                    <h2>Hola <%=pe.getNombreUsuario()%> </h2>   
                 </div>
-
-                <div id="Signin" class="w3-container w3-white w3-padding-16 myLink" style="display: block;">
-                    <h3>Ingrese sus datos personales</h3>
-                    <div class="w3-row-padding" style="margin:0 -16px;">
-                        <form class="" action="RealizarRegistro.do" method="post">
-                            <label>Nombre</label>
-                            <input class="w3-input w3-border" type="text" name="nombre" placeholder="Ingrese su nombre" required="">
-                            <label>Apellidos</label>
-                            <input class="w3-input w3-border" type="text" name="apellidos" placeholder="Ingrese su apellido" required="">
-                            <label>Edad</label>
-                            <input class="w3-input w3-border" type="text" name="edad" placeholder="Ingrese su edad" required="">
-                            <label>Correo</label>
-                            <input class="w3-input w3-border" type="text" name="correo" placeholder="Ingrese su correo" required="">
-                            <label>Usuario</label>
-                            <input class="w3-input w3-border" type="text" name="nombreUsuario" placeholder="Ingrese su usuario" required="">
-                            <label>Contraseña</label>
-                            <input class="w3-input w3-border" type="password" name="contrasena"placeholder="Ingrese su contraseña" required="">
-
-                            <p><button class="w3-button w3-dark-grey" type="submit">Registrarse</button></p>
-                        </form>
-                    </div>
-                </div>
-
-
-
             </div>
         </header>
 
@@ -197,17 +170,17 @@
         <script>
             // Tabs
             function openLink(evt, linkName) {
-            var i, x, tablinks;
-            x = document.getElementsByClassName("myLink");
-            for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablink");
-            for (i = 0; i < x.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
-            }
-            document.getElementById(linkName).style.display = "block";
-            evt.currentTarget.className += " w3-red";
+                var i, x, tablinks;
+                x = document.getElementsByClassName("myLink");
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablink");
+                for (i = 0; i < x.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+                }
+                document.getElementById(linkName).style.display = "block";
+                evt.currentTarget.className += " w3-red";
             }
 
             // Click on the first tablink on load
@@ -221,8 +194,4 @@
 
 
     </body>
-
-
 </html>
-
-

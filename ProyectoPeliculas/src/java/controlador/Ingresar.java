@@ -17,7 +17,7 @@ import modelo.Persona;
  *
  * @author Equipo
  */
-public class RealizarRegistro extends HttpServlet {
+public class Ingresar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,39 +30,21 @@ public class RealizarRegistro extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
-        String nombreUsuario = "";
-        String nombre = "";
-        String apellido = "";
-        String edadn = "";
-        int edad = 0;
-        String contrasena = "";
-        String correo = "";
-        nombreUsuario = request.getParameter("nombreUsuario");
-        nombre = request.getParameter("nombre");
-        apellido = request.getParameter("apellidos");
-        edadn = request.getParameter("edad");
-        contrasena = request.getParameter("contrasena");
-        correo = request.getParameter("correo");
-        try {
-            edad = Integer.parseInt(edadn);
-        } catch (Exception e) {
-            //lo manda a otra vista, ingrese solo numeros en la edad
-            request.getRequestDispatcher("ERROR.html").forward(request, response);
-        }
-
-        //Se envian los datos al modelo
-        Persona p = new Persona(nombreUsuario, contrasena, nombre, apellido, edad, correo);
-
-        //se registra el usuario
-        p.registro();
-        boolean validarRegistro = p.registro();
-        if (validarRegistro == true) {
-            request.getRequestDispatcher("index.html").forward(request, response);
-        } else {
-            request.getRequestDispatcher("RegistroNOExitoso.html").forward(request, response);
-        }
+       String nombreUsuario="";
+       String contrasena="";
+       nombreUsuario=request.getParameter("nombreUsuario");
+       contrasena=request.getParameter("contrasena");
+       
+       Persona pe=new Persona(nombreUsuario, contrasena);
+       boolean validarIngreso;
+       validarIngreso=pe.login(nombreUsuario, contrasena);
+       if(validarIngreso==true){
+           request.getSession().setAttribute("persona", pe);
+           request.getRequestDispatcher("IngresoExitoso.jsp").forward(request, response);
+           
+       }else{
+           request.getRequestDispatcher("IngresoNOExitoso.html").forward(request, response);
+       }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
